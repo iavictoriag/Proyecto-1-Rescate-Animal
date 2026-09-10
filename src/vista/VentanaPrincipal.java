@@ -152,7 +152,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jBRescatesActionPerformed
 
     private void jBReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBReportesActionPerformed
-       javax.swing.JOptionPane.showMessageDialog(this, "Módulo de Reportes HTML y Bitácoras en desarrollo.");
+       VentanaReportes vReportes = new VentanaReportes();
+       vReportes.setVisible(true);
     }//GEN-LAST:event_jBReportesActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
