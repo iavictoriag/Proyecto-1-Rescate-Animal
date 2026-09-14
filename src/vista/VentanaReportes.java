@@ -45,6 +45,7 @@ public class VentanaReportes extends javax.swing.JFrame {
         jLabel1.setText("Reportes y Bitácoras del Sistema");
 
         txtAreaReportes.setColumns(20);
+        txtAreaReportes.setFont(new java.awt.Font("Modern No. 20", 0, 12)); // NOI18N
         txtAreaReportes.setRows(5);
         jScrollPane1.setViewportView(txtAreaReportes);
 
@@ -73,40 +74,43 @@ public class VentanaReportes extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(129, 129, 129)
+                        .addGap(165, 165, 165)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jBRefugio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jBBitacora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(87, Short.MAX_VALUE))
+                            .addComponent(jBRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(89, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(119, 119, 119))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addGap(58, 58, 58)
                 .addComponent(jLabel1)
-                .addGap(53, 53, 53)
+                .addGap(51, 51, 51)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(jBBitacora)
                 .addGap(18, 18, 18)
                 .addComponent(jBRefugio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBRegresar)
-                .addGap(64, 64, 64))
+                .addGap(62, 62, 62))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,15 +126,60 @@ public class VentanaReportes extends javax.swing.JFrame {
     txtAreaReportes.setText(""); // Limpia el área de texto antes de escribir
     txtAreaReportes.append("=== BITÁCORA DEL SISTEMA - RESCATE ANIMAL ===\n");
     txtAreaReportes.append("• Se inicializó el módulo de Espacio de Refugio.\n");
-    txtAreaReportes.append("• Se sincronizó el repositorio local con GitHub (Rama master).\n");
-    txtAreaReportes.append("• Se creó e integró la ventana independiente de reportes.\n");
+    try {
+        // Intentamos leer el archivo de la bitácora directamente
+        java.io.File archivo = new java.io.File("bitacora_acciones.txt");
+        
+        if (archivo.exists()) {
+            java.util.Scanner lector = new java.util.Scanner(archivo);
+            int contadorAcciones = 0;
+            
+            while (lector.hasNextLine()) {
+                String linea = lector.nextLine();
+                txtAreaReportes.append("• " + linea + "\n");
+                contadorAcciones++;
+            }
+            lector.close();
+            
+            txtAreaReportes.append("\n----------------------------------------\n");
+            txtAreaReportes.append("Total de registros en la bitácora: " + contadorAcciones + "\n");
+        } else {
+            txtAreaReportes.append("Aviso: No se encontró el archivo 'bitacora_acciones.txt' en la ruta del proyecto.\n");
+            txtAreaReportes.append("Asegúrate de realizar alguna acción para que se genere el archivo.\n");
+        }
+    } catch (Exception e) {
+        txtAreaReportes.append("Error al leer la bitácora: " + e.getMessage() + "\n");
+    }
     }//GEN-LAST:event_jBBitacoraActionPerformed
 
     private void jBRefugioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRefugioActionPerformed
-    txtAreaReportes.setText(""); // Limpia el área de texto
-    txtAreaReportes.append("=== REPORTE DE ESPACIOS DE REFUGIO ===\n");
-    txtAreaReportes.append("Aquí puedes desplegar los datos de los refugios registrados.\n");
-    // Si manejas una clase de datos o matriz, puedes recorrerla e imprimirla aquí con txtAreaReportes.append(...)
+    txtAreaReportes.setText(""); // Limpia el área de texto antes de mostrar
+    txtAreaReportes.append("=== REPORTE DE ESPACIOS DE REFUGIO ===\n\n");
+    
+    try {
+        // Usamos la ruta absoluta exacta de tu computadora
+        java.io.File archivo = new java.io.File("C:\\Users\\vicky\\OneDrive\\Documentos\\NetBeansProjects\\PROYECTO_1\\refugios.txt");
+        
+        if (archivo.exists()) {
+            java.util.Scanner lector = new java.util.Scanner(archivo);
+            int contadorRefugios = 0;
+            
+            while (lector.hasNextLine()) {
+                String linea = lector.nextLine();
+                txtAreaReportes.append("• " + linea + "\n");
+                contadorRefugios++;
+            }
+            lector.close();
+            
+            txtAreaReportes.append("\n----------------------------------------\n");
+            txtAreaReportes.append("Total de refugios registrados: " + contadorRefugios + "\n");
+        } else {
+            txtAreaReportes.append("Aviso: No se encontró el archivo 'refugios.txt'.\n");
+            txtAreaReportes.append("Registra algunos refugios en el sistema para que aparezcan aquí.\n");
+        }
+    } catch (Exception e) {
+        txtAreaReportes.append("Error al leer el reporte de refugios: " + e.getMessage() + "\n");
+    }
     }//GEN-LAST:event_jBRefugioActionPerformed
 
     private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed
