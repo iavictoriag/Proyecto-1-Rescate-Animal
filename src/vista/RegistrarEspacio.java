@@ -161,7 +161,8 @@ public class RegistrarEspacio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-                                      
+                                
+                                        
     String codigoEspacio = jTtxtCodigo.getText().trim();
     String area = jTtxtArea.getText().trim();
     String estado = jTtxtEstado.getText().trim();
@@ -212,6 +213,18 @@ public class RegistrarEspacio extends javax.swing.JFrame {
     // 6. Incrementar contador
     GestorDatos.contadorEspacios++;
 
+    // --- NUEVO: GUARDAR EN EL ARCHIVO refugios.txt ---
+    try {
+        java.io.FileWriter escritor = new java.io.FileWriter("refugios.txt", true);
+        java.io.PrintWriter linea = new java.io.PrintWriter(escritor);
+        linea.println("Código: " + codigoEspacio + " | Área: " + area + " | Estado: " + estado + " | Animal: " + codAnimal);
+        linea.close();
+        escritor.close();
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Aviso: No se pudo escribir en el archivo de texto: " + e.getMessage());
+    }
+    // ------------------------------------------------
+
     javax.swing.JOptionPane.showMessageDialog(this, "Espacio de refugio registrado con éxito!");
 
     // 7. Limpiar campos
@@ -219,6 +232,7 @@ public class RegistrarEspacio extends javax.swing.JFrame {
     jTtxtArea.setText("");
     jTtxtEstado.setText("");
     jTtxtCodigoAnimal.setText("");
+    
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed

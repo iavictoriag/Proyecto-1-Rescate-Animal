@@ -153,33 +153,36 @@ public class VentanaReportes extends javax.swing.JFrame {
     }//GEN-LAST:event_jBBitacoraActionPerformed
 
     private void jBRefugioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRefugioActionPerformed
-    txtAreaReportes.setText(""); // Limpia el área de texto antes de mostrar
-    txtAreaReportes.append("=== REPORTE DE ESPACIOS DE REFUGIO ===\n\n");
-    
-    try {
-        // Usamos la ruta absoluta exacta de tu computadora
-        java.io.File archivo = new java.io.File("C:\\Users\\vicky\\OneDrive\\Documentos\\NetBeansProjects\\PROYECTO_1\\refugios.txt");
-        
-        if (archivo.exists()) {
-            java.util.Scanner lector = new java.util.Scanner(archivo);
-            int contadorRefugios = 0;
+        {                                        
+        txtAreaReportes.setText(""); // Limpia el área de texto
+        txtAreaReportes.append("=== REPORTE DE ESPACIOS DE REFUGIO ===\n");
+        try {
+            java.io.File archivo = new java.io.File("refugios.txt");
             
-            while (lector.hasNextLine()) {
-                String linea = lector.nextLine();
-                txtAreaReportes.append("• " + linea + "\n");
-                contadorRefugios++;
+            // Esto te mostrará la ruta exacta en donde Java busca el archivo
+            txtAreaReportes.append("Ruta de búsqueda: " + archivo.getAbsolutePath() + "\n\n");
+            
+            if (archivo.exists()) {
+                java.util.Scanner lector = new java.util.Scanner(archivo);
+                int contadorRefugios = 0;
+                
+                while (lector.hasNextLine()) {
+                    String linea = lector.nextLine();
+                    txtAreaReportes.append("• " + linea + "\n");
+                    contadorRefugios++;
+                }
+                lector.close();
+                
+                txtAreaReportes.append("\n----------------------------------------\n");
+                txtAreaReportes.append("Total de refugios registrados: " + contadorRefugios + "\n");
+            } else {
+                txtAreaReportes.append("Aviso: No se encontró el archivo 'refugios.txt'.\n");
+                txtAreaReportes.append("Sugerencia: Asegúrate de registrar un refugio primero o revisa si tu botón de guardar usa otro nombre de archivo.\n");
             }
-            lector.close();
-            
-            txtAreaReportes.append("\n----------------------------------------\n");
-            txtAreaReportes.append("Total de refugios registrados: " + contadorRefugios + "\n");
-        } else {
-            txtAreaReportes.append("Aviso: No se encontró el archivo 'refugios.txt'.\n");
-            txtAreaReportes.append("Registra algunos refugios en el sistema para que aparezcan aquí.\n");
+        } catch (Exception e) {
+            txtAreaReportes.append("Error al leer el reporte de refugios: " + e.getMessage() + "\n");
         }
-    } catch (Exception e) {
-        txtAreaReportes.append("Error al leer el reporte de refugios: " + e.getMessage() + "\n");
-    }
+}
     }//GEN-LAST:event_jBRefugioActionPerformed
 
     private void jBRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegresarActionPerformed
@@ -195,7 +198,7 @@ public class VentanaReportes extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
+       try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -204,13 +207,8 @@ public class VentanaReportes extends javax.swing.JFrame {
             }
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VentanaReportes().setVisible(true));
     }
-
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBitacora;
     private javax.swing.JButton jBRefugio;
@@ -220,4 +218,5 @@ public class VentanaReportes extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtAreaReportes;
     // End of variables declaration//GEN-END:variables
+
 }
